@@ -16,11 +16,16 @@ var info_message = $('#info-message');
 var alert = $('#alert');
 var alert_message = $('#alert-message');
 
-var input_body = $('body');
+var input_body = $('#body');
 var timerId = setInterval(setNotificationDemoBody, 10000);
 
 function setNotificationDemoBody() {
- 
+    if (input_body.val().search(/^It's found today at \d\d:\d\d$/i) !== -1) {
+        var now = new Date();
+        input_body.val('It\'s found today at ' + now.getHours() + ':' + addZero(now.getMinutes()));
+    } else {
+        clearInterval(timerId);
+    }
 }
 
 function addZero(i) {
@@ -92,7 +97,7 @@ if (window.location.protocol === 'https:' &&
         ;
 
         // register fake ServiceWorker for show notification on mobile devices
-        navigator.serviceWorker.register('/messaging-sw.js');
+        navigator.serviceWorker.register('messaging-sw.js');
         Notification.requestPermission(function(permission) {
             if (permission === 'granted') {
                 navigator.serviceWorker.ready.then(function(registration) {

@@ -16,7 +16,7 @@ var info_message = $('#info-message');
 var alert = $('#alert');
 var alert_message = $('#alert-message');
 
-var input_body = $('#body');
+var input_body = $('body');
 var timerId = setInterval(setNotificationDemoBody, 10000);
 
 function setNotificationDemoBody() {
